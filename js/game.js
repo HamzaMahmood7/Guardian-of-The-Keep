@@ -5,26 +5,26 @@ class Game {
     this.startScreen = document.getElementById("game-intro");
     this.gameScreen = document.getElementById("game-screen");
     this.endScreen = document.getElementById("game-end-screen");
-    this.player = null;
-    // empty array of enemies
+    // Creating an instance of the player class: 
+    this.player = new Player(this.gameScreen, 100, 350, 100, 130);
+    this.height = 798;
+    this.width = 1512;
     this.enemies = [];
-    // score and lives values set
     this.score = 0;
     this.lives = 3;
-    // set the game over to false at the start
     this.gameIsOver = false;
     this.gameIntervalId;
     this.gameLoopFrequency = Math.floor(1000 / 60);
   }
-  // start game method: displays the game screen and creates the game interval
   start() {
+    this.gameScreen.style.height = `${this.height}px`;
+    this.gameScreen.style.width = `${this.width}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
   }
-  // game loop method: 
   gameLoop() {
     this.update()
     if(this.gameIsOver) {
