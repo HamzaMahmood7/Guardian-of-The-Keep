@@ -8,16 +8,40 @@
   </head>
   <body>
     <main>
-      <div id="home">
-        <div id="home-screen-logo">
+      <!-- The initial home screen of the game -->
+      <div id="game-intro">
+        <div id="game-intro-logo">
           <img
             src="./assets/game-home-screen-logo.png"
             alt="Guardian of The Keep logo"
           />
           <button id="start-game-button">Begin your journey</button>
+          <p>Protect the keep from it's enemies!</p>
         </div>
       </div>
+
+      <!-- Game screen -->
+      <div id="game-container">
+        <div id="player-stats">
+          <h2>Stats</h2>
+          <p>Score: <span id="score"></span></p>
+          <p>Lives: <span id="lives"></span></p>
+        </div>
+        <div id="game-screen"></div>
+      </div>
+      
+      <!-- Game end screen -->
+       <div id="game-end-screen">
+        <img
+            src="./assets/game-home-screen-logo.png"
+            alt="Guardian of The Keep logo"
+          />
+          <h1>Game Over</h1>
+          <br />
+          <button id="restart-game-button">Restart</button>
+       </div>
     </main>
-    <script src="./index.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
