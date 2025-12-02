@@ -32,7 +32,11 @@ class Game {
         this.gameOver()
     }
   }
+  // runs 60 times per second
   update() {
+    // calls the move method from the player class
+    // allowing the player to move
+    this.player.move()
   }
   gameOver() {
     console.log(`the game is over`)
