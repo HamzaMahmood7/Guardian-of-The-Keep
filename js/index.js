@@ -7,20 +7,23 @@ window.onload = function () {
     startGame();
   });
 
+  restartButtonElement.addEventListener('click', () => {
+    window.location.reload()
+  })
+
   // keyboard event listeners
   window.addEventListener('keydown', (event) => {
-    console.log(`a key pressed`);
     if(event.code === 'ArrowLeft') {
-        ourGame.player.directionX = -2 
+        ourGame.player.directionX = -4 
     }
     if(event.code === 'ArrowRight') {
-        ourGame.player.directionX = 2 
+        ourGame.player.directionX = 4
     }
     if(event.code === 'ArrowUp') {
-        ourGame.player.directionY = -2 
+        ourGame.player.directionY = -4 
     }
     if(event.code === 'ArrowDown') {
-        ourGame.player.directionY = 2 
+        ourGame.player.directionY = 4 
     }
     
   });

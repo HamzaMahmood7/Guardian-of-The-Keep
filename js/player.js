@@ -15,7 +15,7 @@ class Player {
     this.imageElement = document.createElement("img");
     this.imageElement.src = "./assets/archer-right-facing.png";
     this.imageElement.style.position = "absolute";
-    // sets the size of the player
+    // sets the size of the plaåyer
     this.imageElement.style.height = `${this.height}px`;
     this.imageElement.style.width = `${this.width}px`;
     // sets the position of the archer when the game starts
@@ -48,8 +48,8 @@ class Player {
     this.imageElement.style.left = `${this.left}px`;
   }
   didCollide(enemy) {
-    const playerRect = this.element.getBoundingClientRect();
-    const enemyRect = enemy.element.getBoundingClientRect();
+    const playerRect = this.imageElement.getBoundingClientRect();
+    const enemyRect = enemy.imageElement.getBoundingClientRect();
 
     if (
       playerRect.left < enemyRect.right &&

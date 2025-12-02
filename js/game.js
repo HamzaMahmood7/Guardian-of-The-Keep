@@ -4,17 +4,24 @@ class Game {
     // accessing all of the screens
     this.startScreen = document.getElementById("game-intro");
     this.gameScreen = document.getElementById("game-screen");
-    this.endScreen = document.getElementById("game-end-screen");
+    this.gameEndScreen = document.getElementById("game-end-screen");
     // Creating an instance of the player class: 
     this.player = new Player(this.gameScreen, 100, 350, 100, 130);
     this.height = 798;
     this.width = 1512;
-    this.enemies = [];
+    this.enemies = [new Enemy(this.gameScreen)];
     this.score = 0;
     this.lives = 3;
     this.gameIsOver = false;
     this.gameIntervalId;
     this.gameLoopFrequency = Math.floor(1000 / 60);
+
+    //the score and lives elements from HTML
+    this.scoreElement = document.getElementById('score')
+    this.livesElement = document.getElementById('lives')
+
+    // counter to keep track of the frames
+    this.frames = 0;
   }
   start() {
     this.gameScreen.style.height = `${this.height}px`;
@@ -26,6 +33,12 @@ class Game {
     }, this.gameLoopFrequency);
   }
   gameLoop() {
+    // adds one to the frames
+    this.frames++
+    // for every 3 seconds, push a new obstacle to this.enemies
+    if(this.frames % 180 === 0) {
+        this.enemies.push(new Enemy(this.gameScreen))
+    }
     this.update()
     if(this.gameIsOver) {
         clearInterval(this.gameIntervalId);
@@ -37,8 +50,49 @@ class Game {
     // calls the move method from the player class
     // allowing the player to move
     this.player.move()
+
+    // loop over the enemies array and add the move method to the current enemy
+    this.enemies.forEach((currentEnemy, currentEnemyIndex) => {
+        currentEnemy.move()
+
+        // player and enemy collision
+        if(this.player.didCollide(currentEnemy)) {
+            // remove the img from the DOM
+            currentEnemy.imageElement.remove()
+            // remove the enemy from the enemies array
+            this.enemies.splice(currentEnemy, 1);
+            currentEnemyIndex--
+
+            //subtract a life
+            this.lives--
+            this.livesElement.textContent = this.lives
+            if(this.lives === 0) {
+                this.gameIsOver = true
+            }
+        }
+
+
+        // checking if the enemy has reached the keep
+        if (currentEnemy.left <= 30) {
+            // remove the img from the DOM
+            currentEnemy.imageElement.remove()
+            // remove the enemy from the enemies array
+            this.enemies.splice(currentEnemy, 1);
+            currentEnemyIndex--
+            // remove one point from the score
+            this.score++
+            this.scoreElement.textContent = this.score
+            console.log(this.score)
+
+        }
+    });
   }
   gameOver() {
     console.log(`the game is over`)
+    // hide the game screen
+    this.gameScreen.style.display = 'none';
+
+    // show the game end screen
+    this.gameEndScreen.style.display = 'block'
   }
 }
