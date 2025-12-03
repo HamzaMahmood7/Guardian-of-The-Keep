@@ -6,9 +6,9 @@ class Game {
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end-screen");
     // Creating an instance of the player class: 
-    this.player = new Player(this.gameScreen, 100, 350, 100, 130);
-    this.height = 798;
-    this.width = 1512;
+    this.player = new Player(this.gameScreen, 100, 350, 120, 150);
+    // this.height = 920;
+    // this.width = 1780;
     this.enemies = [new Enemy(this.gameScreen)];
     this.score = 0;
     this.lives = 3;
@@ -24,8 +24,8 @@ class Game {
     this.frames = 0;
   }
   start() {
-    this.gameScreen.style.height = `${this.height}px`;
-    this.gameScreen.style.width = `${this.width}px`;
+    // this.gameScreen.style.height = `${this.height}px`;
+    // this.gameScreen.style.width = `${this.width}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
     this.gameIntervalId = setInterval(() => {
@@ -73,7 +73,7 @@ class Game {
 
 
         // checking if the enemy has reached the keep
-        if (currentEnemy.left <= 30) {
+        if (currentEnemy.left <= 0) {
             // remove the img from the DOM
             currentEnemy.imageElement.remove()
             // remove the enemy from the enemies array

@@ -4,12 +4,12 @@ class Enemy {
     this.gameScreen = gameScreen;
     // the 2 points of the enemy that we use to know where we are starting
     // generating a random top value for the enemy: range from 100 - 700
-    this.randomTopPositions = Math.floor(Math.random() * (650 - 150 + 1)) + 150;
-    this.left = 1600;
+    this.randomTopPositions = Math.floor(Math.random() * (750 - 150 + 1)) + 150;
+    this.left = 2000;
     this.top = this.randomTopPositions;
     // the width and height of the character
-    this.width = 60;
-    this.height = 80;
+    this.width = 50;
+    this.height = 70;
     // enemy movement using axis. moves the player from point left and top
     // this.directionX = 0;
     // this.directionY = 0;
