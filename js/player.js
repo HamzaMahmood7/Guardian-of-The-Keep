@@ -13,7 +13,7 @@ class Player {
     this.directionY = 0;
     // creating our archer image tag
     this.imageElement = document.createElement("img");
-    this.imageElement.src = "./assets/archer-right-facing.png";
+    this.imageElement.src = "assets/archer-right-facing.png";
     this.imageElement.style.position = "absolute";
     // sets the size of the plaåyer
     this.imageElement.style.height = `${this.height}px`;
@@ -29,16 +29,16 @@ class Player {
     this.top += this.directionY;
     // Keep the player on the screen
     if (this.left <= 50) {
-      this.left = 50
+      this.left = 50;
     }
     if (this.left + this.width >= 1600) {
-      this.left = 1600 - this.width
+      this.left = 1600 - this.width;
     }
     if (this.top <= 0) {
-      this.top = 0
+      this.top = 0;
     }
     if (this.top + this.height >= 900) {
-      this.top = 900 - this.height
+      this.top = 900 - this.height;
     }
 
     this.updatePosition();

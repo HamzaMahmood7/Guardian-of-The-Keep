@@ -15,7 +15,7 @@ class Enemy {
     // this.directionY = 0;
     // creating our enemy image tag
     this.imageElement = document.createElement("img");
-    this.imageElement.src = "./assets/goblin-character.png";
+    this.imageElement.src = "assets/goblin-character.png";
     this.imageElement.style.position = "absolute";
     // sets the size of  the plaåyer
     this.imageElement.style.height = `${this.height}px`;

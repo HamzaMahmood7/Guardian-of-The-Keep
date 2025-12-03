@@ -5,7 +5,7 @@ class Game {
     this.startScreen = document.getElementById("game-intro");
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end-screen");
-    // Creating an instance of the player class: 
+    // Creating an instance of the player class:
     this.player = new Player(this.gameScreen, 100, 350, 120, 150);
     // this.height = 920;
     // this.width = 1780;
@@ -15,10 +15,11 @@ class Game {
     this.gameIsOver = false;
     this.gameIntervalId;
     this.gameLoopFrequency = Math.floor(1000 / 60);
+    this.arrows = [];
 
     //the score and lives elements from HTML
-    this.scoreElement = document.getElementById('score')
-    this.livesElement = document.getElementById('lives')
+    this.scoreElement = document.getElementById("score");
+    this.livesElement = document.getElementById("lives");
 
     // counter to keep track of the frames
     this.frames = 0;
@@ -34,65 +35,86 @@ class Game {
   }
   gameLoop() {
     // adds one to the frames
-    this.frames++
+    this.frames++;
     // for every 3 seconds, push a new obstacle to this.enemies
-    if(this.frames % 180 === 0) {
-        this.enemies.push(new Enemy(this.gameScreen))
+    if (this.frames % 180 === 0) {
+      this.enemies.push(new Enemy(this.gameScreen));
     }
-    this.update()
-    if(this.gameIsOver) {
-        clearInterval(this.gameIntervalId);
-        this.gameOver()
+    this.update();
+    if (this.gameIsOver) {
+      clearInterval(this.gameIntervalId);
+      this.gameOver();
     }
   }
   // runs 60 times per second
   update() {
     // calls the move method from the player class
     // allowing the player to move
-    this.player.move()
+    this.player.move();
 
     // loop over the enemies array and add the move method to the current enemy
     this.enemies.forEach((currentEnemy, currentEnemyIndex) => {
-        currentEnemy.move()
+      currentEnemy.move();
 
-        // player and enemy collision
-        if(this.player.didCollide(currentEnemy)) {
-            // remove the img from the DOM
-            currentEnemy.imageElement.remove()
-            // remove the enemy from the enemies array
-            this.enemies.splice(currentEnemy, 1);
-            currentEnemyIndex--
+      // player and enemy collision
+      if (this.player.didCollide(currentEnemy)) {
+        // remove the img from the DOM
+        currentEnemy.imageElement.remove();
+        // remove the enemy from the enemies array
+        this.enemies.splice(currentEnemy, 1);
+        currentEnemyIndex--;
 
-            //subtract a life
-            this.lives--
-            this.livesElement.textContent = this.lives
-            if(this.lives === 0) {
-                this.gameIsOver = true
-            }
+        //subtract a life
+        this.lives--;
+        this.livesElement.textContent = this.lives;
+        if (this.lives === 0) {
+          this.gameIsOver = true;
         }
+      }
 
+      // checking if the enemy has reached the keep
+      if (currentEnemy.left <= 0) {
+        // remove the enemy img from the DOM
+        currentEnemy.imageElement.remove();
+        // remove the enemy from the enemies array
+        this.enemies.splice(currentEnemy, 1);
+        currentEnemyIndex--;
+        // end the game
+        this.gameOver()
+        
+      }
 
-        // checking if the enemy has reached the keep
-        if (currentEnemy.left <= 0) {
-            // remove the img from the DOM
-            currentEnemy.imageElement.remove()
-            // remove the enemy from the enemies array
-            this.enemies.splice(currentEnemy, 1);
-            currentEnemyIndex--
-            // remove one point from the score
-            this.score++
-            this.scoreElement.textContent = this.score
-            console.log(this.score)
+      // handles the movement and collision of the arrows
+      this.arrows.forEach((currentArrow, currentArrowIndex) => {
+        currentArrow.move();
 
+        // if the arrow has hit an enemy
+        if (currentArrow.didStrike(currentEnemy)) {
+          // remove the enemy img from the DOM
+          currentEnemy.imageElement.remove();
+          // remove the enemy from the enemies array
+          this.enemies.splice(currentEnemy, 1);
+          currentEnemyIndex--;
+
+          // remove the arrow img from the DOM
+          currentArrow.imageElement.remove();
+          // remove the enemy from the enemies array
+          this.arrows.splice(currentArrow, 1);
+          currentArrowIndex--;
+
+          // increment the score by 1
+          this.score++
+          this.scoreElement.textContent = this.score;
         }
+      });
     });
   }
   gameOver() {
-    console.log(`the game is over`)
+    console.log(`the game is over`);
     // hide the game screen
-    this.gameScreen.style.display = 'none';
+    this.gameScreen.style.display = "none";
 
     // show the game end screen
-    this.gameEndScreen.style.display = 'block'
+    this.gameEndScreen.style.display = "block";
   }
 }
