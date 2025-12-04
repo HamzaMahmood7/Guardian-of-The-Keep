@@ -139,7 +139,7 @@ class Game {
     // show the game end screen
     this.gameEndScreen.style.display = "flex";
 
-    // this.gameOverSound.play();
+    this.gameOverSound.play();
     // show the current players score
     this.currentPlayerScore.textContent = this.score;
     // for the high scores stored in local storage
