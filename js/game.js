@@ -5,6 +5,8 @@ class Game {
     this.startScreen = document.getElementById("game-intro");
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end-screen");
+    // accessing player stats
+    this.playerStats = document.getElementById("player-stats");
     // Creating an instance of the player class:
     this.player = new Player(this.gameScreen, 100, 350, 120, 150);
     // this.height = 920;
@@ -23,12 +25,22 @@ class Game {
 
     // counter to keep track of the frames
     this.frames = 0;
+
+    // adding sound to the game
+    this.bowRelease = new Audio("assets/sounds/bow-release.wav");
+    this.goblinDying = new Audio("assets/sounds/goblin-dying.wav");
+    this.gameOverSound = new Audio("assets/sounds/game-over.wav")
+
+    this.bowRelease.volume = ".2";
+    this.goblinDying.volume = ".2";
+    this.gameOverSound.volume = ".2"
   }
   start() {
     // this.gameScreen.style.height = `${this.height}px`;
     // this.gameScreen.style.width = `${this.width}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
+    this.playerStats.style.display = 'block'
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -61,7 +73,7 @@ class Game {
         // remove the img from the DOM
         currentEnemy.imageElement.remove();
         // remove the enemy from the enemies array
-        this.enemies.splice(currentEnemy, 1);
+        this.enemies.splice(currentEnemyIndex, 1);
         currentEnemyIndex--;
 
         //subtract a life
@@ -77,11 +89,15 @@ class Game {
         // remove the enemy img from the DOM
         currentEnemy.imageElement.remove();
         // remove the enemy from the enemies array
-        this.enemies.splice(currentEnemy, 1);
+        this.enemies.splice(currentEnemyIndex, 1);
         currentEnemyIndex--;
+
+        // lives is zero
+        this.lives = 0;
+        this.livesElement.textContent = 0;
         // end the game
         this.gameOver()
-        
+
       }
 
       // handles the movement and collision of the arrows
@@ -93,17 +109,19 @@ class Game {
           // remove the enemy img from the DOM
           currentEnemy.imageElement.remove();
           // remove the enemy from the enemies array
-          this.enemies.splice(currentEnemy, 1);
+          this.enemies.splice(currentEnemyIndex, 1);
           currentEnemyIndex--;
 
           // remove the arrow img from the DOM
           currentArrow.imageElement.remove();
           // remove the enemy from the enemies array
-          this.arrows.splice(currentArrow, 1);
+          this.arrows.splice(currentArrowIndex, 1);
           currentArrowIndex--;
 
+          // goblin dying sound
+          this.goblinDying.play();
           // increment the score by 1
-          this.score++
+          this.score++;
           this.scoreElement.textContent = this.score;
         }
       });
@@ -116,5 +134,6 @@ class Game {
 
     // show the game end screen
     this.gameEndScreen.style.display = "block";
+    // this.gameOverSound.play()
   }
 }

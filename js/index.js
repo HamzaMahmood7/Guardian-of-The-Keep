@@ -37,6 +37,8 @@ window.onload = function () {
           ourGame.player.top + 75 - 10
         )
       );
+      // calling the bow Release sound from the game class
+      ourGame.bowRelease.play()
     }
   });
   window.addEventListener("keyup", (event) => {
