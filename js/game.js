@@ -35,10 +35,12 @@ class Game {
     this.bowRelease = new Audio("assets/sounds/bow-release.wav");
     this.goblinDying = new Audio("assets/sounds/goblin-dying.wav");
     this.gameOverSound = new Audio("assets/sounds/game-over.wav");
+    this.archerHurt = new Audio("assets/sounds/archer-hurt.wav")
 
     this.bowRelease.volume = ".2";
     this.goblinDying.volume = ".2";
     this.gameOverSound.volume = ".2";
+    this.archerHurt.volume = ".3"
   }
   start() {
     // this.gameScreen.style.height = `${this.height}px`;
@@ -75,6 +77,8 @@ class Game {
 
       // player and enemy collision
       if (this.player.didCollide(currentEnemy)) {
+        // playing the archer hurt sound
+        this.archerHurt.play()
         // remove the img from the DOM
         currentEnemy.imageElement.remove();
         // remove the enemy from the enemies array
