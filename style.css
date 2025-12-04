@@ -78,6 +78,22 @@ body {
   display: none;
 }
 
+#game-screen-the-keep {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  left: 0; /* Stick to left side */
+  top: 50%; /* Center vertically */
+  transform: translateY(250%) rotate(-90deg);
+  transform-origin: left top;
+}
+
+#game-screen-the-keep h2 {
+  color: white;
+  font-size: 40px;
+  margin: 0;
+}
+
 #game-end-screen {
   background-image: url(./assets/home-screen-background.png);
   background-size: cover;

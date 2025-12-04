@@ -7,6 +7,10 @@ class Game {
     this.gameEndScreen = document.getElementById("game-end-screen");
     // accessing player stats
     this.PlayerStatsElement = document.getElementById("player-stats");
+    // the keep entrance container
+    this.theKeepEntranceContainer = document.getElementById(
+      "game-screen-the-keep"
+    );
     // high scores container
     this.highScoreListElement = document.getElementById("high-scores");
     // Creating an instance of the player class:
@@ -35,12 +39,12 @@ class Game {
     this.bowRelease = new Audio("assets/sounds/bow-release.wav");
     this.goblinDying = new Audio("assets/sounds/goblin-dying.wav");
     this.gameOverSound = new Audio("assets/sounds/game-over.wav");
-    this.archerHurt = new Audio("assets/sounds/archer-hurt.wav")
+    this.archerHurt = new Audio("assets/sounds/archer-hurt.wav");
 
     this.bowRelease.volume = ".2";
     this.goblinDying.volume = ".2";
     this.gameOverSound.volume = ".2";
-    this.archerHurt.volume = ".3"
+    this.archerHurt.volume = ".3";
   }
   start() {
     // this.gameScreen.style.height = `${this.height}px`;
@@ -48,6 +52,7 @@ class Game {
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
     this.PlayerStatsElement.style.display = "block";
+    this.theKeepEntranceContainer.style.display = "block";
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -78,8 +83,8 @@ class Game {
       // player and enemy collision
       if (this.player.didCollide(currentEnemy)) {
         // playing the archer hurt sound
-        this.archerHurt.play()
-        // remove the img from the DOM
+        this.archerHurt.play();
+        // remove the enemy img from the DOM
         currentEnemy.imageElement.remove();
         // remove the enemy from the enemies array
         this.enemies.splice(currentEnemyIndex, 1);
@@ -88,6 +93,7 @@ class Game {
         //subtract a life
         this.lives--;
         this.livesElement.textContent = this.lives;
+        // End the game is zero lives are remaining
         if (this.lives === 0) {
           this.gameIsOver = true;
         }
@@ -105,7 +111,7 @@ class Game {
         this.lives = 0;
         this.livesElement.textContent = 0;
         // end the game
-        this.gameOver();
+        this.gameIsOver = true;
       }
 
       // handles the movement and collision of the arrows
@@ -140,6 +146,8 @@ class Game {
     // hide the game screen and the player stats
     this.gameScreen.style.display = "none";
     this.PlayerStatsElement.style.display = "none";
+    this.theKeepEntranceContainer.style.display = "none";
+
     // show the game end screen
     this.gameEndScreen.style.display = "flex";
 
