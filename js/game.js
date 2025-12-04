@@ -6,7 +6,9 @@ class Game {
     this.gameScreen = document.getElementById("game-screen");
     this.gameEndScreen = document.getElementById("game-end-screen");
     // accessing player stats
-    this.playerStats = document.getElementById("player-stats");
+    this.PlayerStatsElement = document.getElementById("player-stats");
+    // high scores container
+    this.highScoreListElement = document.getElementById("high-scores");
     // Creating an instance of the player class:
     this.player = new Player(this.gameScreen, 100, 350, 120, 150);
     // this.height = 920;
@@ -23,24 +25,27 @@ class Game {
     this.scoreElement = document.getElementById("score");
     this.livesElement = document.getElementById("lives");
 
+    // current players score to show at the end of the game
+    this.currentPlayerScore = document.getElementById("current-player-score");
+
     // counter to keep track of the frames
     this.frames = 0;
 
     // adding sound to the game
     this.bowRelease = new Audio("assets/sounds/bow-release.wav");
     this.goblinDying = new Audio("assets/sounds/goblin-dying.wav");
-    this.gameOverSound = new Audio("assets/sounds/game-over.wav")
+    this.gameOverSound = new Audio("assets/sounds/game-over.wav");
 
     this.bowRelease.volume = ".2";
     this.goblinDying.volume = ".2";
-    this.gameOverSound.volume = ".2"
+    this.gameOverSound.volume = ".2";
   }
   start() {
     // this.gameScreen.style.height = `${this.height}px`;
     // this.gameScreen.style.width = `${this.width}px`;
     this.startScreen.style.display = "none";
     this.gameScreen.style.display = "block";
-    this.playerStats.style.display = 'block'
+    this.PlayerStatsElement.style.display = "block";
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -96,8 +101,7 @@ class Game {
         this.lives = 0;
         this.livesElement.textContent = 0;
         // end the game
-        this.gameOver()
-
+        this.gameOver();
       }
 
       // handles the movement and collision of the arrows
@@ -129,11 +133,39 @@ class Game {
   }
   gameOver() {
     console.log(`the game is over`);
-    // hide the game screen
+    // hide the game screen and the player stats
     this.gameScreen.style.display = "none";
-
+    this.PlayerStatsElement.style.display = "none";
     // show the game end screen
-    this.gameEndScreen.style.display = "block";
-    // this.gameOverSound.play()
+    this.gameEndScreen.style.display = "flex";
+
+    // this.gameOverSound.play();
+    // show the current players score
+    this.currentPlayerScore.textContent = this.score;
+    // for the high scores stored in local storage
+    const highScoresFromLocalStorage = JSON.parse(
+      localStorage.getItem("high-scores")
+    );
+    if (!highScoresFromLocalStorage) {
+      localStorage.setItem("high-scores", JSON.stringify([this.score]));
+    } else {
+      // adds the score from the last game
+      highScoresFromLocalStorage.push(this.score);
+      // sorts the high scores in descending order
+      highScoresFromLocalStorage.sort((a, b) => {
+        return b - a;
+      });
+      // splicing the top 3 scores from the array
+      const topThreeScores = highScoresFromLocalStorage.splice(0, 3);
+      // chages the value in the local storage to be the new array
+      localStorage.setItem("high-scores", JSON.stringify(topThreeScores));
+
+      // update the game over page to show the top 3 high scores
+      topThreeScores.forEach((currentScore) => {
+        const listElement = document.createElement("li");
+        listElement.textContent = currentScore;
+        this.highScoreListElement.appendChild(listElement);
+      });
+    }
   }
 }

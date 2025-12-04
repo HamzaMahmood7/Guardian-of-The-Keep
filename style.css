@@ -23,11 +23,9 @@ body {
 
 #game-intro-sound {
   position: absolute;
-  bottom: 30px; 
+  bottom: 30px;
   right: 30px;
 }
-
-
 
 #start-game-button {
   height: auto;
@@ -52,7 +50,7 @@ body {
   margin-bottom: 20px;
 }
 
-#game-intro-sound p{
+#game-intro-sound p {
   color: rgba(254, 229, 181);
   font-size: 20px;
 }
@@ -87,19 +85,24 @@ body {
   width: 100vw;
   height: 100vh;
   display: none;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #game-end-screen img {
   width: 50%;
   height: auto;
-  margin-top: 20px;
+  margin-top: 25px;
   /* margin-bottom: 20px; */
 }
 
 #game-end-screen h1 {
-  font-size: 50px;
+  font-size: 60px;
   color: darkred;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 #restart-game-button {
@@ -111,4 +114,24 @@ body {
   color: rgba(57, 88, 51);
   padding: 10px 20px 10px 20px;
   background-color: rgba(254, 229, 181);
+}
+
+#all-scores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game-end-screen h2 {
+  font-size: 30px;
+  color: white;
+  margin-bottom: 5px;
+}
+
+#high-scores {
+  color: white;
+  font-size: 20px;
+  padding-left: 0;
+  margin-left: 0;
+  text-align: center;
 }
