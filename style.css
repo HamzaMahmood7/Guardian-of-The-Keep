@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap");
 
 body {
   padding: 0;
@@ -32,18 +32,22 @@ body {
 #start-game-button {
   height: auto;
   font-size: 30px;
-  font-weight: bold;
   border: 1px solid black;
   border-radius: 5px;
   color: rgba(57, 88, 51);
   padding: 10px 20px 10px 20px;
   background-color: rgba(254, 229, 181);
+  font-family: "MedievalSharp", cursive;
+  font-weight: bold;
+  font-style: normal;
 }
 
 #game-intro-logo p {
   font-size: 30px;
   color: rgba(249, 185, 38);
-  font-weight: bold;
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #game-intro-logo img {
@@ -126,18 +130,22 @@ body {
   font-size: 60px;
   color: darkred;
   font-weight: bold;
+  font-family: "MedievalSharp", cursive;
+  font-style: normal;
   margin-bottom: 10px;
 }
 
 #restart-game-button {
   height: auto;
   font-size: 30px;
-  font-weight: bold;
   border: 1px solid black;
   border-radius: 5px;
   color: rgba(57, 88, 51);
   padding: 10px 20px 10px 20px;
   background-color: rgba(254, 229, 181);
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #all-scores {
@@ -150,11 +158,17 @@ body {
   font-size: 30px;
   color: white;
   margin-bottom: 5px;
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #high-scores {
   color: white;
   font-size: 20px;
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
   padding-left: 0;
   margin-left: 0;
   text-align: center;
