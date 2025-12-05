@@ -40,11 +40,13 @@ class Game {
     this.goblinDying = new Audio("assets/sounds/goblin-dying.wav");
     this.gameOverSound = new Audio("assets/sounds/game-over.wav");
     this.archerHurt = new Audio("assets/sounds/archer-hurt.wav");
+    this.archerWalking = new Audio("assets/sounds/archer-walking.wav")
 
     this.bowRelease.volume = ".2";
     this.goblinDying.volume = ".2";
     this.gameOverSound.volume = ".2";
     this.archerHurt.volume = ".3";
+    this.archerWalking.volume = ".2"
   }
   start() {
     // this.gameScreen.style.height = `${this.height}px`;
@@ -151,7 +153,7 @@ class Game {
     // show the game end screen
     this.gameEndScreen.style.display = "flex";
 
-    // this.gameOverSound.play();
+    this.gameOverSound.play();
     // show the current players score
     this.currentPlayerScore.textContent = this.score;
     // for the high scores stored in local storage

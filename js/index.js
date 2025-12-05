@@ -1,5 +1,5 @@
 window.onload = function () {
-  let ourGame;
+  let myGame;
   const startButtonElement = document.getElementById("start-game-button");
   const restartButtonElement = document.getElementById("restart-game-button");
 
@@ -14,51 +14,55 @@ window.onload = function () {
   // keyboard event listeners
   window.addEventListener("keydown", (event) => {
     if (event.code === "ArrowLeft") {
-      ourGame.player.directionX = -4;
+      myGame.player.directionX = -4;
+      myGame.archerWalking.play();
     }
     if (event.code === "ArrowRight") {
-      ourGame.player.directionX = 4;
+      myGame.player.directionX = 4;
+      myGame.archerWalking.play();
     }
     if (event.code === "ArrowUp") {
-      ourGame.player.directionY = -4;
+      myGame.player.directionY = -4;
+      myGame.archerWalking.play();
     }
     if (event.code === "ArrowDown") {
-      ourGame.player.directionY = 4;
+      myGame.player.directionY = 4;
+      myGame.archerWalking.play();
     }
     // Shooting the arrow
     if (event.code === "Space") {
       // dynamically getting the position of the player
-      ourGame.arrows.push(
+      myGame.arrows.push(
         new Arrow(
-          ourGame.gameScreen,
+          myGame.gameScreen,
           // plus the width of the player
-          ourGame.player.left + 80,
+          myGame.player.left + 80,
           // the top of the player plus the player width minus half of the height of the arrow
-          ourGame.player.top + 75 - 10
+          myGame.player.top + 75 - 10
         )
       );
       // calling the bow Release sound from the game class
-      ourGame.bowRelease.play()
+      myGame.bowRelease.play();
     }
   });
   window.addEventListener("keyup", (event) => {
     if (event.code === "ArrowLeft") {
-      ourGame.player.directionX = 0;
+      myGame.player.directionX = 0;
     }
     if (event.code === "ArrowRight") {
-      ourGame.player.directionX = 0;
+      myGame.player.directionX = 0;
     }
     if (event.code === "ArrowUp") {
-      ourGame.player.directionY = 0;
+      myGame.player.directionY = 0;
     }
     if (event.code === "ArrowDown") {
-      ourGame.player.directionY = 0;
+      myGame.player.directionY = 0;
     }
   });
 
   function startGame() {
     console.log(`start game!`);
-    ourGame = new Game();
-    ourGame.start();
+    myGame = new Game();
+    myGame.start();
   }
 };
