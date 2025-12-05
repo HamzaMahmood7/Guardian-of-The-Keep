@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
 body {
   padding: 0;
   text-align: center;
@@ -63,7 +65,11 @@ body {
 #player-stats {
   display: none;
   position: absolute;
-  color: white;
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  color: rgb(195, 189, 189);
   z-index: 10;
   margin-left: 10px;
 }
@@ -84,13 +90,16 @@ body {
   z-index: 10;
   left: 0; /* Stick to left side */
   top: 50%; /* Center vertically */
-  transform: translateY(250%) rotate(-90deg);
+  transform: translateY(270%) rotate(-90deg);
   transform-origin: left top;
 }
 
 #game-screen-the-keep h2 {
-  color: white;
-  font-size: 40px;
+  font-family: "MedievalSharp", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  color: rgb(195, 189, 189);
   margin: 0;
 }
 
